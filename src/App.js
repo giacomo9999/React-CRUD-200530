@@ -50,11 +50,31 @@ class App extends Component {
   };
 
   updateDinosaur = (e) => {
+    e.preventDefault();
     console.log("updateDinosaur here...");
+    const updatedDinosaur = {
+      id: this.state.tempId,
+      name: this.state.tempDinoName,
+      color: this.state.tempDinoColor,
+    };
+    this.setState({
+      editPanelOpen: false,
+      tempId: null,
+      tempDinoName: "",
+      tempDinoColor: "",
+      dinosaurs: [
+        ...this.state.dinosaurs.map((dinosaur) =>
+          dinosaur.id === updatedDinosaur.id ? updatedDinosaur : dinosaur
+        ),
+      ],
+    });
   };
 
   deleteDinosaur = (id) => {
     console.log("deleteDinosaur here...", id);
+    this.setState({
+      dinosaurs: this.state.dinosaurs.filter((dinosaur) => dinosaur.id !== id),
+    });
   };
 
   render() {
@@ -68,6 +88,7 @@ class App extends Component {
         />
         {this.state.editPanelOpen ? (
           <EditDinosaur
+            handleInputChange={this.handleInputChange}
             updateDinosaur={this.updateDinosaur}
             tempId={this.state.tempId}
             tempDinoName={this.state.tempDinoName}

@@ -7,7 +7,7 @@ const DinosaurInventory = (props) => {
       <td>{dinosaur.name}</td>
       <td>{dinosaur.color}</td>
       <td>
-        <button onClick={() => props.editDinosaur(dinosaur.id)}>Edit</button>
+        <button onClick={() => props.editDinosaur(dinosaur)}>Edit</button>
       </td>
       <td>
         <button onClick={() => props.deleteDinosaur(dinosaur.id)}>Delete</button>
